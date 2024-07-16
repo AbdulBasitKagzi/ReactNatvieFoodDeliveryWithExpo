@@ -4,7 +4,7 @@ import React from "react";
 const Page = () => {
   return (
     <View>
-      <Text>Page</Text>
+      <Text style={{ color: "red" }}>Page</Text>
     </View>
   );
 };

@@ -45,7 +45,6 @@ const CustomHeader = () => {
   const insets = useSafeAreaInsets();
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const openModal = () => {
-    console.log("open modal");
     bottomSheetRef.current?.present();
   };
   return (
