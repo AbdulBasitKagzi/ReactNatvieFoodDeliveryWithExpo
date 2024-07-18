@@ -73,6 +73,7 @@ export default function RootLayoutNav() {
               ),
             }}
           />
+          <Stack.Screen name="details" />
         </Stack>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
