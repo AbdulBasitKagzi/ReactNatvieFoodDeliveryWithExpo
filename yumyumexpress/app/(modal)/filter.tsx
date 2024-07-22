@@ -14,6 +14,7 @@ import { useNavigation } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Animated, {
+  FadeIn,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -29,29 +30,35 @@ interface Category {
 const ItemBox = () => (
   <>
     <View style={styles.itemContainer}>
-      <TouchableOpacity style={styles.item}>
-        <Ionicons name="arrow-down-outline" size={20} color={Colors.medium} />
-        <Text style={{ flex: 1 }}>Sort</Text>
-        <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
-      </TouchableOpacity>
+      <Animated.View entering={FadeIn.duration(500).delay(200)}>
+        <TouchableOpacity style={styles.item}>
+          <Ionicons name="arrow-down-outline" size={20} color={Colors.medium} />
+          <Text style={{ flex: 1 }}>Sort</Text>
+          <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
+        </TouchableOpacity>
+      </Animated.View>
+      <Animated.View entering={FadeIn.duration(500).delay(200)}>
+        <TouchableOpacity style={styles.item}>
+          <Ionicons name="fast-food-outline" size={20} color={Colors.medium} />
+          <Text style={{ flex: 1 }}>Hygiene rating</Text>
+          <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
+        </TouchableOpacity>
+      </Animated.View>
 
-      <TouchableOpacity style={styles.item}>
-        <Ionicons name="fast-food-outline" size={20} color={Colors.medium} />
-        <Text style={{ flex: 1 }}>Hygiene rating</Text>
-        <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.item}>
-        <Ionicons name="pricetag-outline" size={20} color={Colors.medium} />
-        <Text style={{ flex: 1 }}>Offers</Text>
-        <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.item}>
-        <Ionicons name="nutrition-outline" size={20} color={Colors.medium} />
-        <Text style={{ flex: 1 }}>Dietary</Text>
-        <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
-      </TouchableOpacity>
+      <Animated.View entering={FadeIn.duration(500).delay(200)}>
+        <TouchableOpacity style={styles.item}>
+          <Ionicons name="pricetag-outline" size={20} color={Colors.medium} />
+          <Text style={{ flex: 1 }}>Offers</Text>
+          <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
+        </TouchableOpacity>
+      </Animated.View>
+      <Animated.View entering={FadeIn.duration(500).delay(200)}>
+        <TouchableOpacity style={styles.item}>
+          <Ionicons name="nutrition-outline" size={20} color={Colors.medium} />
+          <Text style={{ flex: 1 }}>Dietary</Text>
+          <Ionicons name="chevron-forward" size={22} color={Colors.primary} />
+        </TouchableOpacity>
+      </Animated.View>
     </View>
     <Text style={styles.header}>Categories</Text>
   </>
@@ -99,7 +106,10 @@ const Filter = () => {
   });
 
   const renderItem: ListRenderItem<Category> = ({ item, index }) => (
-    <View style={styles.row}>
+    <Animated.View
+      style={styles.row}
+      entering={FadeIn.duration(500).delay(200)}
+    >
       <Text style={styles.itemText}>
         {item.name} ({item.count})
       </Text>
@@ -128,7 +138,7 @@ const Filter = () => {
           setItems(updatedItems);
         }}
       />
-    </View>
+    </Animated.View>
   );
 
   return (
