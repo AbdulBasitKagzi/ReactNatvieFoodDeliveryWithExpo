@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { getDishById } from "@/assets/data/restaurant";
 import Colors from "@/constants/Colors";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -10,11 +10,19 @@ import Animated, {
   FadeInLeft,
   FadeInUp,
 } from "react-native-reanimated";
+import useBasketStore, { Product } from "@/store/basketStore";
 
 const Dish = () => {
   const { id } = useLocalSearchParams();
   const item = getDishById(+id);
   const router = useRouter();
+  const { addProduct } = useBasketStore();
+  const navigation = useNavigation();
+
+  const addToCart = (item: Product) => {
+    addProduct(item as Product);
+    navigation.goBack();
+  };
 
   return (
     <SafeAreaView
@@ -43,7 +51,10 @@ const Dish = () => {
         </View>
 
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.fullButton}>
+          <TouchableOpacity
+            style={styles.fullButton}
+            onPress={() => addToCart(item as Product)}
+          >
             <Text style={styles.footerText}>Add for ${item?.price}</Text>
           </TouchableOpacity>
         </View>

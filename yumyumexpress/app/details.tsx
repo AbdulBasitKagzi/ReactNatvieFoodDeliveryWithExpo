@@ -21,12 +21,14 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
+import useBasketStore from "@/store/basketStore";
 
 const Details = () => {
   const navigation = useNavigation();
   const opacity = useSharedValue(0);
   const scrollRef = useRef<ParallaxScrollView>(null);
   const itemsRef = useRef<TouchableOpacity[]>([]);
+  const { items, total } = useBasketStore();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const DATA = restaurant.food.map((item, index) => ({
@@ -184,6 +186,20 @@ const Details = () => {
           </ScrollView>
         </View>
       </Animated.View>
+      {/* Footer Basket */}
+      {total > 0 && (
+        <View style={styles.footer}>
+          <SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#fff" }}>
+            <Link href="/basket" asChild>
+              <TouchableOpacity style={styles.fullButton}>
+                <Text style={styles.basket}>{items}</Text>
+                <Text style={styles.footerText}>View Basket</Text>
+                <Text style={styles.basketTotal}>${total}</Text>
+              </TouchableOpacity>
+            </Link>
+          </SafeAreaView>
+        </View>
+      )}
     </>
   );
 };
